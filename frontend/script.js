@@ -1,3 +1,4 @@
+console.log("SCRIPT EJECUTADO");
 const searchInput = document.getElementById("search");
 const suggestions = document.getElementById("suggestions");
 const postersDiv = document.getElementById("posters");
