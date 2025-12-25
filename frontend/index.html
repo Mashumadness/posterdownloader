@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Poster Downloader (TMDB)</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <h1>Poster Downloader (TMDB)</h1>
 
 <div class="top-bar">
+
     <div class="search-container">
         <input id="search" type="text" placeholder="Buscar película..." autocomplete="off">
         <div id="suggestions" class="suggestions"></div>
@@ -25,14 +26,16 @@
         </select>
     </div>
 
-    <button id="sort-btn">Ordenar por resolución</button>
+    <button id="sort-btn" class="sort-btn">
+        Ordenar por resolución
+    </button>
+
 </div>
 
 <h2 id="selected-title"></h2>
+
 <div id="posters" class="posters"></div>
 
-<!-- IMPORTANTE -->
-<script src="./script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
