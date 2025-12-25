@@ -63,3 +63,24 @@ PosterDownloader/
 │   └── styles.css
 │
 └── README.md
+
+## 🌐 Ejecutar Frontend
+
+### Opción recomendada (servidor local)
+
+Desde la raíz del proyecto:
+
+```bash
+cd frontend
+python -m http.server 8000
+Luego abrir en el navegador:
+
+http://127.0.0.1:8000
+
+## 🌐 Ejecutar Backend
+
+Desde la raíz del proyecto:
+
+```bash
+cd backend
+python app.py
