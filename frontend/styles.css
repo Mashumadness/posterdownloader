@@ -19,6 +19,10 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* =========================
+   BUSCADOR
+   ========================= */
+
 .search-container {
     position: relative;
     width: 360px;
@@ -36,13 +40,14 @@ h1 {
 .suggestions {
     position: absolute;
     top: 100%;
-    width: 100%;
+    left: 0;
+    right: 0;
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
     max-height: 280px;
     overflow-y: auto;
-    z-index: 20;
+    z-index: 9999;
 }
 
 .suggestion {
@@ -54,7 +59,10 @@ h1 {
     background: #f2f2f2;
 }
 
-/* Filtros */
+/* =========================
+   FILTROS
+   ========================= */
+
 .filters {
     display: flex;
     flex-direction: column;
@@ -67,7 +75,10 @@ h1 {
     border-radius: 5px;
 }
 
-/* Botón ordenar */
+/* =========================
+   BOTÓN ORDENAR
+   ========================= */
+
 .sort-btn {
     padding: 10px 14px;
     background: #0077ff;
@@ -77,41 +88,53 @@ h1 {
     border-radius: 6px;
     cursor: pointer;
 }
+
 .sort-btn:hover {
     background: #005fcc;
 }
 
-/* POSTERS GRID */
+/* =========================
+   GRID DE POSTERS
+   ========================= */
+
 .posters {
     margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 22px;
 }
 
+/* Card */
 .poster-card {
     background: white;
     border-radius: 8px;
     padding: 12px;
-    width: 240px;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
     border: 1px solid #ddd;
+    transition: transform 0.15s ease;
 }
 
 .poster-card:hover {
-    transform: scale(1.02);
-    transition: 0.15s;
+    transform: scale(1.03);
 }
 
+/* IMAGEN — FIX CLAVE PARA QUE NO SEA GIGANTE */
 .poster-img {
     width: 100%;
+    height: auto;
+    max-height: 340px;        /* 👈 límite visual */
+    object-fit: contain;     /* mantiene proporción */
     border-radius: 6px;
+    display: block;
 }
 
-/* Etiquetas de calidad */
+/* =========================
+   ETIQUETAS
+   ========================= */
+
 .tag {
     margin-top: 10px;
     padding: 5px 10px;
@@ -119,6 +142,7 @@ h1 {
     font-size: 13px;
     font-weight: bold;
     color: white;
+    text-align: center;
 }
 
 .tag.excellent {
@@ -135,5 +159,7 @@ h1 {
 
 .tag.res {
     margin-top: 6px;
-    font-size: 15px;
+    font-size: 14px;
+    color: #333;
+    background: #eaeaea;
 }
