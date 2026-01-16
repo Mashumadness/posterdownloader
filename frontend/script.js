@@ -18,6 +18,7 @@ searchInput.addEventListener("input", () => {
 
     if (q.length < 2) {
         suggestions.innerHTML = "";
+        suggestions.style.display = "none";
         return;
     }
 
@@ -26,21 +27,35 @@ searchInput.addEventListener("input", () => {
             .then(r => r.json())
             .then(data => {
                 suggestions.innerHTML = "";
-                data.forEach(m => {
-                    const d = document.createElement("div");
-                    d.className = "suggestion";
-                    d.innerText = `${m.title} (${m.year})`;
-                    d.onclick = () => selectMovie(m);
-                    suggestions.appendChild(d);
-                });
+                if (data.length > 0) {
+                    suggestions.style.display = "block";
+                    data.forEach(m => {
+                        const d = document.createElement("div");
+                        d.className = "suggestion";
+                        d.innerText = `${m.title} (${m.year})`;
+                        d.onclick = () => selectMovie(m);
+                        suggestions.appendChild(d);
+                    });
+                }
+            })
+            .catch(err => {
+                console.error("Error buscando películas:", err);
             });
     }, 300);
 });
 
-// -------- SELECT --------
+// Close suggestions when clicking outside
+document.addEventListener("click", (e) => {
+    if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+        suggestions.style.display = "none";
+    }
+});
+
+// -------- SELECT MOVIE --------
 function selectMovie(movie) {
     titleHeader.innerText = `${movie.title} (${movie.year})`;
     suggestions.innerHTML = "";
+    suggestions.style.display = "none";
     searchInput.value = movie.title;
 
     fetch(`${API_BASE}/api/images?id=${movie.id}`)
@@ -48,10 +63,13 @@ function selectMovie(movie) {
         .then(list => {
             currentImages = list;
             renderImages();
+        })
+        .catch(err => {
+            console.error("Error cargando imágenes:", err);
         });
 }
 
-// -------- RENDER --------
+// -------- RENDER IMAGES --------
 function renderImages() {
     postersDiv.innerHTML = "";
 
@@ -74,18 +92,22 @@ function renderImages() {
         card.className = "poster-card";
 
         card.innerHTML = `
-            <img src="${img.url}" class="poster-img">
-            <div class="tag res">${img.width} × ${img.height}</div>
-            <button class="download-btn">Descargar</button>
+            <div class="poster-img-container">
+                <img src="${img.url}" class="poster-img" alt="Poster">
+                <div class="tag res">${img.width} × ${img.height}</div>
+            </div>
+            <div class="card-actions">
+                <button class="download-btn">⬇ Descargar HD</button>
+            </div>
         `;
 
-        card.querySelector("img").onclick = () => {
+        card.querySelector(".poster-img-container").onclick = () => {
             window.open(img.url, "_blank");
         };
 
-        card.querySelector(".download-btn").onclick = () => {
-            window.location.href =
-                `${API_BASE}/api/download?url=${encodeURIComponent(img.url)}`;
+        card.querySelector(".download-btn").onclick = (e) => {
+            e.stopPropagation();
+            window.location.href = `${API_BASE}/api/download?url=${encodeURIComponent(img.url)}`;
         };
 
         postersDiv.appendChild(card);
@@ -97,5 +119,6 @@ qualityFilter.addEventListener("change", renderImages);
 
 sortBtn.addEventListener("click", () => {
     sortDirection = sortDirection === "desc" ? "asc" : "desc";
+    sortBtn.textContent = sortDirection === "desc" ? "↓ Mayor a menor" : "↑ Menor a mayor";
     renderImages();
 });

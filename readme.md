@@ -84,3 +84,4 @@ Desde la raíz del proyecto:
 ```bash
 cd backend
 python app.py
+ 

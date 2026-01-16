@@ -2,40 +2,44 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Poster Downloader (TMDB)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster Downloader - TMDB</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>🎬 Poster Downloader</h1>
+            <p class="subtitle">Descubre y descarga posters de películas en alta calidad</p>
+        </header>
 
-<h1>Poster Downloader (TMDB)</h1>
+        <div class="search-section">
+            <div class="search-container">
+                <input id="search" type="text" placeholder="Buscar película... (ej: Batman, Inception, Avatar)" autocomplete="off">
+                <div id="suggestions" class="suggestions"></div>
+            </div>
 
-<div class="top-bar">
+            <div class="controls">
+                <div class="filter-group">
+                    <label for="quality-filter">Calidad:</label>
+                    <select id="quality-filter">
+                        <option value="all">Todas las resoluciones</option>
+                        <option value="excellent">Excelente (≥ 3000 px)</option>
+                        <option value="acceptable">Aceptable (2500–2999 px)</option>
+                        <option value="poor">Baja (< 2500 px)</option>
+                    </select>
+                </div>
+                <button id="sort-btn" class="sort-btn">
+                    ↕ Ordenar por resolución
+                </button>
+            </div>
+        </div>
 
-    <div class="search-container">
-        <input id="search" type="text" placeholder="Buscar película..." autocomplete="off">
-        <div id="suggestions" class="suggestions"></div>
+        <h2 id="selected-title"></h2>
+
+        <div id="posters" class="posters"></div>
     </div>
 
-    <div class="filters">
-        <label for="quality-filter">Filtros:</label>
-        <select id="quality-filter">
-            <option value="all">Mostrar todas</option>
-            <option value="excellent">Excelente (≥ 3000 px)</option>
-            <option value="acceptable">Aceptable (2500–2999 px)</option>
-            <option value="poor">No recomendado (< 2500 px)</option>
-        </select>
-    </div>
-
-    <button id="sort-btn" class="sort-btn">
-        Ordenar por resolución
-    </button>
-
-</div>
-
-<h2 id="selected-title"></h2>
-
-<div id="posters" class="posters"></div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
