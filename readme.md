@@ -64,24 +64,22 @@ PosterDownloader/
 │
 └── README.md
 
-## 🌐 Ejecutar Frontend
+Terminal 1 — Backend
 
-### Opción recomendada (servidor local)
+cd c:\Users\matias.suarez\Desktop\Proyectos\posterdownloader\backend
 
-Desde la raíz del proyecto:
+# Instalar dependencias (solo la primera vez)
+pip install flask flask-cors requests python-dotenv
 
-```bash
-cd frontend
-python -m http.server 8000
-Luego abrir en el navegador:
-
-http://127.0.0.1:8000
-
-## 🌐 Ejecutar Backend
-
-Desde la raíz del proyecto:
-
-```bash
-cd backend
+# Iniciar el servidor
 python app.py
+El backend queda corriendo en http://127.0.0.1:5000
+
+Terminal 2 — Frontend
+
+cd c:\Users\matias.suarez\Desktop\Proyectos\posterdownloader\frontend
+
+# Servir el frontend
+python -m http.server 8000
+Luego abrir en el navegador: http://127.0.0.1:8000
  
